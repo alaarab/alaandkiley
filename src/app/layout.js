@@ -1,6 +1,10 @@
 import localFont from "next/font/local";
 import "./globals.css";
 
+// Import Google Fonts for the heading
+import { Playfair_Display } from 'next/font/google'; 
+
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -10,6 +14,11 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
+});
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-playfair-display',
 });
 
 export const metadata = {
