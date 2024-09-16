@@ -2,6 +2,12 @@ export const photos = {
   "sd": {
     "01_gettingready": [
       {
+        "src": "/api/photos/sd/01_gettingready/CAR_5906.jpg",
+        "width": 1024,
+        "height": 1534,
+        "size": "234.76 KB"
+      },
+      {
         "src": "/api/photos/sd/01_gettingready/CAR_5927.jpg",
         "width": 1024,
         "height": 684,
@@ -80,16 +86,58 @@ export const photos = {
         "size": "213.69 KB"
       },
       {
+        "src": "/api/photos/sd/01_gettingready/IE9A3942.jpg",
+        "width": 1024,
+        "height": 1536,
+        "size": "189.75 KB"
+      },
+      {
         "src": "/api/photos/sd/01_gettingready/IE9A3945.jpg",
         "width": 1024,
         "height": 1536,
         "size": "191.43 KB"
       },
       {
+        "src": "/api/photos/sd/01_gettingready/IE9A3954.jpg",
+        "width": 1024,
+        "height": 683,
+        "size": "152.94 KB"
+      },
+      {
+        "src": "/api/photos/sd/01_gettingready/IE9A3956.jpg",
+        "width": 1024,
+        "height": 1536,
+        "size": "254.71 KB"
+      },
+      {
+        "src": "/api/photos/sd/01_gettingready/IE9A3958.jpg",
+        "width": 1024,
+        "height": 1536,
+        "size": "248.41 KB"
+      },
+      {
+        "src": "/api/photos/sd/01_gettingready/IE9A3961.jpg",
+        "width": 1024,
+        "height": 683,
+        "size": "151.62 KB"
+      },
+      {
+        "src": "/api/photos/sd/01_gettingready/IE9A3962.jpg",
+        "width": 1024,
+        "height": 683,
+        "size": "145.58 KB"
+      },
+      {
         "src": "/api/photos/sd/01_gettingready/IE9A3987.jpg",
         "width": 1024,
         "height": 683,
         "size": "118.70 KB"
+      },
+      {
+        "src": "/api/photos/sd/01_gettingready/IE9A4026.jpg",
+        "width": 1024,
+        "height": 683,
+        "size": "128.83 KB"
       },
       {
         "src": "/api/photos/sd/01_gettingready/IE9A4033.jpg",
@@ -132,6 +180,12 @@ export const photos = {
         "width": 1024,
         "height": 1536,
         "size": "322.52 KB"
+      },
+      {
+        "src": "/api/photos/sd/01_gettingready/IE9A4103.jpg",
+        "width": 1024,
+        "height": 1536,
+        "size": "349.22 KB"
       },
       {
         "src": "/api/photos/sd/01_gettingready/IE9A4158.jpg",
@@ -4578,6 +4632,12 @@ export const photos = {
   "hd": {
     "01_gettingready": [
       {
+        "src": "/api/photos/hd/01_gettingready/CAR_5906.jpg",
+        "width": 2909,
+        "height": 4357,
+        "size": "6.62 MB"
+      },
+      {
         "src": "/api/photos/hd/01_gettingready/CAR_5927.jpg",
         "width": 4869,
         "height": 3250,
@@ -4656,16 +4716,58 @@ export const photos = {
         "size": "10.15 MB"
       },
       {
+        "src": "/api/photos/hd/01_gettingready/IE9A3942.jpg",
+        "width": 4000,
+        "height": 6000,
+        "size": "10.19 MB"
+      },
+      {
         "src": "/api/photos/hd/01_gettingready/IE9A3945.jpg",
         "width": 4000,
         "height": 6000,
         "size": "11.15 MB"
       },
       {
+        "src": "/api/photos/hd/01_gettingready/IE9A3954.jpg",
+        "width": 5436,
+        "height": 3624,
+        "size": "11.69 MB"
+      },
+      {
+        "src": "/api/photos/hd/01_gettingready/IE9A3956.jpg",
+        "width": 3989,
+        "height": 5984,
+        "size": "15.99 MB"
+      },
+      {
+        "src": "/api/photos/hd/01_gettingready/IE9A3958.jpg",
+        "width": 4000,
+        "height": 6000,
+        "size": "17.09 MB"
+      },
+      {
+        "src": "/api/photos/hd/01_gettingready/IE9A3961.jpg",
+        "width": 5722,
+        "height": 3815,
+        "size": "13.16 MB"
+      },
+      {
+        "src": "/api/photos/hd/01_gettingready/IE9A3962.jpg",
+        "width": 6000,
+        "height": 4000,
+        "size": "17.82 MB"
+      },
+      {
         "src": "/api/photos/hd/01_gettingready/IE9A3987.jpg",
         "width": 6000,
         "height": 4000,
         "size": "10.65 MB"
+      },
+      {
+        "src": "/api/photos/hd/01_gettingready/IE9A4026.jpg",
+        "width": 6000,
+        "height": 4000,
+        "size": "10.96 MB"
       },
       {
         "src": "/api/photos/hd/01_gettingready/IE9A4033.jpg",
@@ -4708,6 +4810,12 @@ export const photos = {
         "width": 3690,
         "height": 5535,
         "size": "14.30 MB"
+      },
+      {
+        "src": "/api/photos/hd/01_gettingready/IE9A4103.jpg",
+        "width": 3244,
+        "height": 4866,
+        "size": "11.61 MB"
       },
       {
         "src": "/api/photos/hd/01_gettingready/IE9A4158.jpg",
