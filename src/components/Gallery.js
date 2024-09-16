@@ -40,6 +40,7 @@ const PhotoGallery = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setAnchorEl(null);
   }, [photoIndex, allPhotosSD, allPhotosHD]);
 
   // Handle menu open/close
@@ -94,7 +95,7 @@ const PhotoGallery = () => {
                   aria-label="Download"
                   onClick={handleMenuOpen}
                   size="large"
-                  style={{ color: 'grey' }}  // Change icon color to grey
+                  style={{ color: '#9e9e9e' }} v // Change this to a lighter grey color
                 >
                   <DownloadIcon />
                 </IconButton>
