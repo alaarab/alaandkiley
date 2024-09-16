@@ -88,7 +88,7 @@ const PhotoGallery = () => {
                   aria-label="Download"
                   className="yarl__button"
                 >
-                  <FontAwesomeIcon icon={faDownload} />
+                  <FontAwesomeIcon icon={faDownload} size="lg" />
                 </button>
 
                 {/* Dropdown Menu */}
