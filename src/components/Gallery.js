@@ -8,7 +8,8 @@ import 'yet-another-react-lightbox/styles.css';
 import { Thumbnails, Fullscreen, Zoom } from 'yet-another-react-lightbox/plugins';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import { photos } from '../data/photos'; // This now points to your generated photo data
-import DownloadIcon from '@mui/icons-material/Download';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 const PhotoGallery = () => {
   const allPhotosSD = Object.values(photos['sd']).flat();
@@ -87,7 +88,7 @@ const PhotoGallery = () => {
                   aria-label="Download"
                   className="yarl__button"
                 >
-                  <DownloadIcon />
+                  <FontAwesomeIcon icon={faDownload} />
                 </button>
 
                 {/* Dropdown Menu */}

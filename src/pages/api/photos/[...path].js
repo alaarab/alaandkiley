@@ -48,3 +48,11 @@ export default function handler(req, res) {
     res.status(404).json({ message: 'File not found' });
   }
 }
+
+// Increase the API response size limit (Next.js default is 4MB)
+export const config = {
+  api: {
+    bodyParser: false,  // Disable body parsing, because we're using streams
+    responseLimit: false, // Disable the response size limit
+  },
+};
