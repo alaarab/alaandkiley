@@ -1,21 +1,26 @@
 /* globals.css */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
 :root {
-  --background: #ffffff; /* Consistent white background */
+  --background: url('/background2.jpeg') no-repeat center center fixed;
+  --background-size: cover;
   --foreground: #171717;
   --primary-font: 'Arial', 'Helvetica', sans-serif;
   --heading-font: 'Playfair Display', serif;
 }
 
-html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
-  color: var(--foreground);
-  background: var(--background); /* White background globally */
+  background: var(--background); /* Background image applied */
+  background-size: var(--background-size); /* Ensure image covers entire screen */
   font-family: var(--primary-font);
+  color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 * {
