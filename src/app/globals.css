@@ -28,3 +28,12 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.download-button-container {
+  position: relative;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.download-button-container div {
+  display: block;
+}
