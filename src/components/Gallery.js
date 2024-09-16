@@ -69,6 +69,7 @@ const PhotoGallery = () => {
           index={photoIndex}
           on={{
             view: ({ index: currentIndex }) => {
+              setShowMenu(false);
               setPhotoIndex(currentIndex);
             },
           }}
