@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import PhotoAlbum from "react-photo-album"; // Use the aggregate component
-import "react-photo-album/styles.css"; // Import the necessary CSS for the layout
-import Lightbox from 'yet-another-react-lightbox'; // Correct Lightbox import
-import 'yet-another-react-lightbox/styles.css'; // Lightbox CSS
-import { Thumbnails, Fullscreen, Zoom } from 'yet-another-react-lightbox/plugins'; // Correct plugin import
-import 'yet-another-react-lightbox/plugins/thumbnails.css'; // Thumbnails CSS
-import { photos } from '../data/photos';
+import PhotoAlbum from "react-photo-album";
+import "react-photo-album/styles.css";
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import { Thumbnails, Fullscreen, Zoom } from 'yet-another-react-lightbox/plugins';
+import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import { photos } from '../data/photos'; // This now points to your generated photo data
 import DownloadIcon from '@mui/icons-material/Download';
 
 const PhotoGallery = () => {
@@ -26,12 +26,12 @@ const PhotoGallery = () => {
 
   const downloadFile = (quality) => {
     const selectedPhoto = quality === 'hd' ? allPhotosHD[photoIndex] : allPhotosSD[photoIndex];
-    const fileExtension = selectedPhoto.src.split('.').pop(); // Get the file extension (jpg, png, etc.)
-    const originalFilename = selectedPhoto.src.split('/').pop().split('.')[0]; // Extract the original filename
+    const fileExtension = selectedPhoto.src.split('.').pop();
+    const originalFilename = selectedPhoto.src.split('/').pop().split('.')[0];
 
     const link = document.createElement('a');
-    link.href = selectedPhoto.src;
-    link.download = `${originalFilename}-${quality.toUpperCase()}.${fileExtension}`; // Set the new filename with -SD or -HD
+    link.href = selectedPhoto.src; // Use the API-based src
+    link.download = `${originalFilename}-${quality.toUpperCase()}.${fileExtension}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -91,75 +91,38 @@ const PhotoGallery = () => {
                 </button>
 
                 {/* Dropdown Menu */}
-                {
-                  showMenu && (
-                    <div
-                      ref={menuRef}
-                      style={{
-                        position: 'absolute',
-                        top: '30px',
-                        right: '0px',
-                        zIndex: '10000',
-                        backgroundColor: '#333',
-                        color: '#fff',
-                        padding: '10px',
-                        borderRadius: '5px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '5px',
-                        minWidth: '180px',
-                      }}
+                {showMenu && (
+                  <div
+                    ref={menuRef}
+                    style={{
+                      position: 'absolute',
+                      top: '30px',
+                      right: '0px',
+                      zIndex: '10000',
+                      backgroundColor: '#333',
+                      color: '#fff',
+                      padding: '10px',
+                      borderRadius: '5px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '5px',
+                      minWidth: '180px',
+                    }}
+                  >
+                    <button
+                      style={{ background: 'none', color: '#fff', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                      onClick={() => downloadFile('sd')}
                     >
-                      <button
-                        style={{
-                          background: 'none',
-                          color: '#fff',
-                          border: 'none',
-                          cursor: 'pointer',
-                          // fontSize: '16px', // Adjusted font size
-                          // fontWeight: 'bold', // Makes the "Download SD" text bold
-                          textAlign: 'left', // Aligns the text to the left
-                        }}
-                        onClick={() => downloadFile('sd')}
-                      >
-                        Download SD{' '}
-                        <span
-                          style={{
-                            // fontSize: '14px', // Slightly smaller for the size info
-                            // fontWeight: 'normal',
-                            color: '#bbb', // Lighter color for the size info
-                          }}
-                        >
-                          ({allPhotosSD[photoIndex].size})
-                        </span>
-                      </button>
-                      <button
-                        style={{
-                          background: 'none',
-                          color: '#fff',
-                          border: 'none',
-                          cursor: 'pointer',
-                          // fontSize: '16px',
-                          // fontWeight: 'bold',
-                          textAlign: 'left',
-                        }}
-                        onClick={() => downloadFile('hd')}
-                      >
-                        Download HD{' '}
-                        <span
-                          style={{
-                            // fontSize: '14px',
-                            // fontWeight: 'normal',
-                            color: '#bbb',
-                          }}
-                        >
-                          ({allPhotosHD[photoIndex].size})
-                        </span>
-                      </button>
-                    </div>
-                  )
-                }
-
+                      Download SD ({allPhotosSD[photoIndex].size})
+                    </button>
+                    <button
+                      style={{ background: 'none', color: '#fff', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                      onClick={() => downloadFile('hd')}
+                    >
+                      Download HD ({allPhotosHD[photoIndex].size})
+                    </button>
+                  </div>
+                )}
               </div>,
               "zoom",
               "fullscreen",
