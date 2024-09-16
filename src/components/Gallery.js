@@ -8,17 +8,19 @@ import 'yet-another-react-lightbox/styles.css';
 import { Thumbnails, Fullscreen, Zoom } from 'yet-another-react-lightbox/plugins';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import { photos } from '../data/photos'; // This now points to your generated photo data
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import DownloadIcon from '@mui/icons-material/Download';
 
 const PhotoGallery = () => {
   const allPhotosSD = Object.values(photos['sd']).flat();
   const allPhotosHD = Object.values(photos['hd']).flat();
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const menuRef = useRef(null);
+  const lightboxRef = useRef(null); // Reference to the Lightbox container
 
   // Open Lightbox function using useCallback to avoid unnecessary re-renders
   const openLightbox = useCallback((index) => {
@@ -40,26 +42,26 @@ const PhotoGallery = () => {
     document.body.removeChild(link);
   }, [photoIndex, allPhotosSD, allPhotosHD]);
 
-  // Handle mouse enter and leave for the download menu
-  const handleMouseEnter = useCallback(() => {
-    setShowMenu(true);
-  }, []);
+  // Handle menu open/close
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget); // Correctly reference the clicked button
+  };
 
-  const handleMouseLeave = useCallback(() => {
-    setShowMenu(false);
-  }, []);
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   // Handle Lightbox close
-  const handleLightboxClose = useCallback(() => {
+  const handleLightboxClose = () => {
     setIsOpen(false);
-    setShowMenu(false); // Close menu when lightbox is closed
-  }, []);
+    handleMenuClose(); // Close the menu when lightbox is closed
+  };
 
   // Handle lightbox view changes
-  const handleView = useCallback(({ index: currentIndex }) => {
+  const handleView = ({ index: currentIndex }) => {
     setPhotoIndex(currentIndex);
-    setShowMenu(false); // Close the menu when navigating left or right
-  }, [setPhotoIndex, setShowMenu]);
+    handleMenuClose(); // Close the menu when navigating left or right
+  };
 
   return (
     <div>
@@ -73,6 +75,7 @@ const PhotoGallery = () => {
 
       {isOpen && (
         <Lightbox
+          ref={lightboxRef} // Add a reference to the Lightbox
           open={isOpen}
           close={handleLightboxClose}
           slides={allPhotosSD.map(photo => ({
@@ -85,56 +88,38 @@ const PhotoGallery = () => {
           plugins={[Thumbnails, Fullscreen, Zoom]}
           toolbar={{
             buttons: [
-              <div
-                key="download"
-                className="yarl__button"
-                style={{ position: 'relative' }}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                {/* Download button */}
-                <button
-                  type="button"
+              <>
+                <IconButton
+                  key="download"
                   aria-label="Download"
-                  className="yarl__button"
+                  onClick={handleMenuOpen}
+                  size="large"
+                  style={{ color: 'grey' }}  // Change icon color to grey
                 >
-                  <FontAwesomeIcon icon={faDownload} size="lg" />
-                </button>
-
-                {/* Dropdown Menu */}
-                {showMenu && (
-                  <div
-                    ref={menuRef}
-                    style={{
-                      position: 'absolute',
-                      top: '30px',
-                      right: '0px',
-                      zIndex: '10000',
-                      backgroundColor: '#333',
-                      color: '#fff',
-                      padding: '10px',
-                      borderRadius: '5px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '5px',
-                      minWidth: '180px',
-                    }}
-                  >
-                    <button
-                      style={{ background: 'none', color: '#fff', border: 'none', cursor: 'pointer', textAlign: 'left' }}
-                      onClick={() => downloadFile('sd')}
-                    >
-                      Download SD ({allPhotosSD[photoIndex].size})
-                    </button>
-                    <button
-                      style={{ background: 'none', color: '#fff', border: 'none', cursor: 'pointer', textAlign: 'left' }}
-                      onClick={() => downloadFile('hd')}
-                    >
-                      Download HD ({allPhotosHD[photoIndex].size})
-                    </button>
-                  </div>
-                )}
-              </div>,
+                  <DownloadIcon />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl} // Tie to the clicked button
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                  disablePortal // Prevents the Menu from rendering in the document body
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',  // Adjust based on the layout of your toolbar
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',  // Adjust based on the layout of your toolbar
+                  }}
+                >
+                  <MenuItem onClick={() => downloadFile('sd')}>
+                    Download SD ({allPhotosSD[photoIndex].size})
+                  </MenuItem>
+                  <MenuItem onClick={() => downloadFile('hd')}>
+                    Download HD ({allPhotosHD[photoIndex].size})
+                  </MenuItem>
+                </Menu>
+              </>,
               "zoom",
               "fullscreen",
               "close",
