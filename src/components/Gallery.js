@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import PhotoAlbum from "react-photo-album";
 import "react-photo-album/styles.css";
 import Lightbox from 'yet-another-react-lightbox';
@@ -20,12 +20,14 @@ const PhotoGallery = () => {
 
   const menuRef = useRef(null);
 
-  const openLightbox = (index) => {
+  // Open Lightbox function using useCallback to avoid unnecessary re-renders
+  const openLightbox = useCallback((index) => {
     setPhotoIndex(index);
     setIsOpen(true);
-  };
+  }, []);
 
-  const downloadFile = (quality) => {
+  // Download file function with dynamic quality handling
+  const downloadFile = useCallback((quality) => {
     const selectedPhoto = quality === 'hd' ? allPhotosHD[photoIndex] : allPhotosSD[photoIndex];
     const fileExtension = selectedPhoto.src.split('.').pop();
     const originalFilename = selectedPhoto.src.split('/').pop().split('.')[0];
@@ -36,15 +38,28 @@ const PhotoGallery = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
+  }, [photoIndex, allPhotosSD, allPhotosHD]);
 
-  const handleMouseEnter = () => {
+  // Handle mouse enter and leave for the download menu
+  const handleMouseEnter = useCallback(() => {
     setShowMenu(true);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     setShowMenu(false);
-  };
+  }, []);
+
+  // Handle Lightbox close
+  const handleLightboxClose = useCallback(() => {
+    setIsOpen(false);
+    setShowMenu(false); // Close menu when lightbox is closed
+  }, []);
+
+  // Handle lightbox view changes
+  const handleView = useCallback(({ index: currentIndex }) => {
+    setPhotoIndex(currentIndex);
+    setShowMenu(false); // Close the menu when navigating left or right
+  }, [setPhotoIndex, setShowMenu]);
 
   return (
     <div>
@@ -59,19 +74,13 @@ const PhotoGallery = () => {
       {isOpen && (
         <Lightbox
           open={isOpen}
-          close={() => {
-            setIsOpen(false);
-            setShowMenu(false);
-          }}
+          close={handleLightboxClose}
           slides={allPhotosSD.map(photo => ({
             src: photo.src,
           }))}
           index={photoIndex}
           on={{
-            view: ({ index: currentIndex }) => {
-              setShowMenu(false);
-              setPhotoIndex(currentIndex);
-            },
+            view: handleView,
           }}
           plugins={[Thumbnails, Fullscreen, Zoom]}
           toolbar={{
