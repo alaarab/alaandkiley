@@ -349,12 +349,6 @@ export const photos = {
         "height": 683,
         "size": "116.26 KB"
       },
-      {
-        "src": "/api/photos/sd/01_gettingready/IE9A5202.jpg",
-        "width": 1024,
-        "height": 683,
-        "size": "157.90 KB"
-      }
     ],
     "02_firstlook": [
       {
@@ -4979,12 +4973,6 @@ export const photos = {
         "height": 4000,
         "size": "13.81 MB"
       },
-      {
-        "src": "/api/photos/hd/01_gettingready/IE9A5202.jpg",
-        "width": 6000,
-        "height": 4000,
-        "size": "8.92 MB"
-      }
     ],
     "02_firstlook": [
       {
